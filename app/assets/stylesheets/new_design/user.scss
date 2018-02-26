@@ -1,0 +1,507 @@
+@import 'variables';
+@import 'utils';
+
+.profile-hero {
+  position: relative;
+  &._form-opened {
+    .btn-edit {
+      display: none;
+    }
+  }
+
+  &__img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 292px;
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+      background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+      background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+      background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+      -webkit-background-size: 3px 3px;
+      -moz-background-size: 3px 3px;
+      background-size: 3px 3px;
+    }
+    img {
+      height: 292px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    right: 0;
+    // background: rgba(74,74,74,.7);
+    text-align: center;
+    padding-bottom: 73px;
+    padding-top: 14px;
+  }
+  &__user-name {
+    font-size: 32px;
+    color: #fff;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 1px 1px 4px rgba(0,0,0,.4);
+    position: relative;
+    display: inline-block;
+    &-wrap {
+      text-align: center;
+      max-width: 460px;
+      margin: 0 auto 21px;
+      &:hover {
+        .btn-edit {
+          opacity: 1;
+          pointer-events: all;
+          text-decoration: none;
+        }
+      }
+    }
+
+
+    &._open-edit-form {
+      .btn-edit {
+        display: none;
+      }
+    }
+
+    .btn-edit {
+      display: block;
+      color: #fff;
+      font-size: 0.7em;
+      cursor: pointer;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s linear;
+      position: absolute;
+      left: calc(100% + 8px);
+      line-height: 45px;
+    }
+  }
+  &__user-location {
+    text-shadow: 1px 1px 4px rgba(0,0,0,.4);
+    position: relative;
+    font-size: 14px;
+    color: rgba(255,255,255,.5);
+    color: #fff;
+    display: inline-block;
+    font-family: 'Libre Franklin', sans-serif;
+
+    .svg-marker {
+      width: 8px;
+      height: 12px;
+      fill: #fff;
+      position: relative;
+      left: 3px;
+      top: 1px;
+    }
+
+    &-wrap {
+      text-align: center;
+      max-width: 240px;
+      margin: 0 auto 21px;
+      &:hover {
+        .btn-edit {
+          opacity: 1;
+          pointer-events: all;
+          text-decoration: none;
+        }
+      }
+    }
+
+    &._open-edit-form {
+      .btn-edit,
+      .svg-marker {
+        display: none;
+      }
+    }
+
+    .btn-edit {
+      display: block;
+      color: #fff;
+      font-size: 0.8em;
+      cursor: pointer;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s linear;
+      position: absolute;
+      left: calc(100% + 8px);
+      line-height: 20px;
+    }
+  }
+
+
+  &__user-name,
+  &__user-location {
+    form {
+      input[type="text"] {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        border-bottom: 2px solid #fff;
+        font-style: italic;
+        text-align: center;
+        color: #fff;
+      }
+      input[type="submit"],
+      input[type="button"] {
+        height: 40px;
+        line-height: 40px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        margin: 0 10px;
+        padding: 0;
+        width: 100px;
+        border: 2px solid #000;
+        border-radius: 60px;
+        text-transform: uppercase;
+      }
+      input[type="submit"] {
+        background-color: #fff;
+        color: #000;
+        @extend .hover-default;
+      }
+      input[type="button"] {
+        background-color: #000;
+        color: #fff;
+        @extend .hover-alt;
+      }   // todo FD/DESIGNER: add hover/focus/active states
+    }
+  }
+
+
+  &__dl {
+    display: inline-flex;
+    font-family: 'Libre Franklin', sans-serif;
+    margin: 0;
+    position: relative;
+    right: -10px;
+  }
+  &__dl-item {
+    display: flex;
+    align-items: center;
+    min-width: 120px;
+  }
+  &__dd {
+    padding-right: 7px;
+    text-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    font-size: 32px;
+    color: #fff;
+    margin: 0;
+  }
+  &__dt {
+    padding-right: 5px;
+    text-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    font-size: 11px;
+    color: #fff;
+    margin: 0;
+    text-align: left;
+    font-weight: 400;
+  }
+  &__user-portrait {
+    position: absolute;
+    bottom: -54px;
+    left: 0;
+    right: 0;
+    width: 109px;
+    height: 109px;
+    margin: 0 auto;
+    img {
+      width: 109px;
+      height: 109px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  &__user-trans-btns {
+    position: absolute;
+    right: 5.5%;
+    bottom: 14px;
+
+    svg {
+      fill: #000;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      position: relative;
+      top: -1px;
+    }
+
+    .svg-bitcoin {
+      width: 12px;
+      height: 17px;
+    }
+    .svg-envelope {
+      width: 18px;
+      height: 14px;
+    }
+  }
+
+  &__btn {
+    margin: 0;
+    padding: 2px 16px 0 11px;
+    display: inline-block;
+    line-height: 32px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #000;
+    transition: background .2s linear;
+    letter-spacing: 0.2px;
+
+    &+& {
+      margin-left: 18px;
+    }
+
+    &:visited {
+      color: #000;
+    }
+    .desktop &:hover,
+    .desktop &:focus {
+      background: #fff;
+    }
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+}
+
+.profile-wrapper {
+  .profile-bio {
+    word-break: break-all;
+    word-break: break-word;
+    overflow: auto;
+    max-height: 230px;
+
+  }
+  .bio-wrapper {
+    display: block;
+    width: 40%;
+    margin: auto;
+    padding-top: 30px;
+
+    h3 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #000;
+
+      i {
+        font-size: 1.2em;
+        color: #ddd;
+        margin-left: 5px;
+      }
+
+      p.profile-bio {
+        font-family: 'Libre Franklin', sans-serif;
+        font-size: 1.2em;
+        color: #555;
+        line-height: 1.5em;
+      }
+    }
+
+    input[type="submit"],
+    input[type="button"] {
+      height: 40px;
+      line-height: 40px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      padding: 0;
+      margin: 0;
+      width: 100px;
+      border: 2px solid #000;
+      border-radius: 60px;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    input[type="submit"] {
+      background-color: #fff;
+      color: #000;
+    }
+
+    input[type="button"] {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .ok-button {
+      margin-right: 5px !important;
+    }
+  }
+
+  .profile-projects {
+    max-width: 1200px;
+    padding: 20px;
+    display: block;
+    margin: auto;
+    position: relative;
+  }
+
+  textarea {
+    height: 180px;
+    max-height: 180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+
+.myprojets-wrapper {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 20px 30px;
+
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .table {
+    thead {
+      th {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600;
+        font-size: 1em;
+        text-transform: uppercase;
+        vertical-align: middle;
+      }
+    }
+    tbody {
+      td {
+        vertical-align: middle;
+        padding-left: 10px !important;
+      }
+
+      td.project {
+        font-family: 'Roboto', sans-serif;
+        color: #000 !important;
+        font-size: 1em !important;
+        font-weight: 600;
+        padding-right: 20px !important;
+
+        a {
+          color: #555;
+        }
+      }
+
+      td.leader {
+        padding-right: 20px !important;
+        a {
+          font-family: 'Libre Franklin', sans-serif;
+          color: #555;
+          font-size: 0.9em !important;
+        }
+        i {
+          color: #555;
+        }
+      }
+
+      td.team {
+        font-family: 'Libre Franklin', sans-serif;
+        color: #000;
+        font-size: 1.2em !important;
+        text-align: left;
+      }
+
+      td.edit {
+        a {
+          font-family: 'Libre Franklin', sans-serif;
+          color: #555;
+          font-size: 1em !important;
+        }
+      }
+
+      td.delete {
+        .btn-reset:hover {
+          color: #555;
+        }
+      }
+
+      td.fund {
+        padding-right: 20px !important;
+
+        span {
+          font-family: 'Libre Franklin', sans-serif;
+          color: #000;
+          font-size: 1em !important;
+        }
+
+        .progress-percent {
+          font-family: 'Libre Franklin', sans-serif;
+          font-size: 0.8em;
+          color: #aaa;
+          text-align: left;
+        }
+
+        .progress {
+          background-color: #ddd !important;
+          clear: both;
+          height: 5px;
+          .progress-bar {
+            background-color: #555;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.forgot-pwd-wrapper {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+
+  .forgot-pwd-form {
+    display: block;
+    margin: 5% auto 3% !important;
+    max-width: 350px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+
+    h3 {
+      font-family: 'Roboto', sans-serif;
+      color: #000;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    label {
+      font-family: 'Libre Franklin', sans-serif;
+      font-size: 1em;
+      color: #000;
+      float: left;
+    }
+
+    .form-group {
+      margin-top: 50px;
+    }
+  }
+}
+

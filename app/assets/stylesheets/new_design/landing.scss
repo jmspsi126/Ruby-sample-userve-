@@ -1,0 +1,470 @@
+@import "../sections/s-service";
+
+
+.landing-header {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border-bottom: 2px solid #eee;
+  z-index: 2000;
+
+  a:hover,
+  a:focus {
+    text-decoration: none;
+  }
+
+  .header-wrap {
+    padding: 10px 3%;
+  }
+
+  .landing-logo {
+    display: inline-block;
+
+    a {
+      font-size: 32px;
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        color: #000;
+      }
+    }
+  }
+
+  .register-group {
+    margin-top: 14px;
+    font-family: 'Roboto';
+
+    span {
+      padding: 0 20px;
+      color: #666;
+    }
+
+    a {
+      font-family: 'Roboto';
+      color: #333;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+
+  .projects-link {
+    margin-left: 20px;
+    font-family: 'Roboto';
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+    position: relative;
+    top: -5px;
+    border-radius: 20px;
+    padding: 6px 20px;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: #333;
+    }
+  }
+
+}
+
+.landing-content {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+
+  a:hover,
+  a:focus {
+    text-decoration: none;
+  }
+
+  p {
+    text-align: left;
+  }
+
+  .hero-banner {
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 4;
+    background-color: #fff;
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-top: 10%;
+    }
+
+    .hero-promo {
+      display: block;
+      text-align: center;
+      width: 100%;
+      // top: 40%;
+      // -webkit-transform: translate(0, -40%);
+      //         transform: translate(0, -40%);
+
+      h1, p {
+        font-family: 'Roboto';
+        color: #000;
+        display: block;
+        text-align: left;
+      }
+
+      h1 {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 3.5vw;
+        letter-spacing: -1px;
+      }
+
+      p {
+        display: inline-block;
+        float: left;
+        font-size: 18px;
+        font-weight: bold;
+        padding-top: 10px;
+      }
+
+      .promo-wrapper {
+        max-width: 690px;
+        margin: 20% auto;
+        display: block;
+        padding: 30px 20px;
+      }
+    }
+
+    .hero-start {
+      clear: both;
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding-top: 20px;
+    }
+
+  }
+
+  .carousel-banner {
+    display: block;
+    width: 100%;
+    position: relative;
+
+    .landing-carousel {
+      display: block;
+
+      .carousel-item {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 50vw;
+        min-height: 350px;
+        background-color: #fff;
+
+        img {
+          width: auto;
+          float: left;
+          display: inline-block;
+          width: 60%;
+          height: 100%;
+        }
+
+        .carousel-text {
+          position: absolute;
+          display: inline-block;
+          top: 22%;
+          right: 0;
+          padding-right: 5%;
+
+          .text-wrapper {
+            // position: absolute;
+            // left: 5%;
+            // top: 20%;
+            // -webkit-transform: translate(0, 20%);
+            //         transform: translate(0, 20%);
+            // padding: 5%;
+          }
+
+          h1 {
+            font-family: 'Roboto';
+            color: #000;
+            letter-spacing: -1px;
+            margin-top: 0;
+            padding-bottom: 20px;
+            font-size: 3vw;
+          }
+
+          p {
+            font-family: 'Libre Franklin';
+            color: #000;
+            line-height: 2em;
+            font-size: 1.3vw;
+          }
+
+          .carousel-start {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding-top: 30px;
+          }
+        }
+      }
+
+      button.slick-arrow {
+        display: none;
+      }
+
+      ul.slick-dots {
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+
+        li {
+          position: relative;
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          margin: 0 5px;
+          padding: 0;
+          cursor: pointer;
+          background-color: #fff;
+          border-radius: 50%;
+          border: 2px solid #fff;
+          box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+          &.slick-active {
+            background-color: #111;
+          }
+
+          button {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  hr {
+    padding: 0;
+    margin: 0;
+    border-top: 2px solid #aaa;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+}
+
+.landing-footer {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  background-color: #333;
+  clear: both;
+
+  .about-banner {
+    display: block;
+    padding-top: 40px;
+    text-align: center;
+
+    a {
+      font-family: 'Libre Franklin';
+      color: #ddd;
+      font-size: 1.2em;
+    }
+  }
+
+  .social-banner {
+    display: block;
+    padding-top: 40px;
+    text-align: center;
+
+    span {
+      padding: 5px 20px;
+      i {
+        color: #fff;
+        font-weight: 600;
+        font-size: 32px;
+      }
+    }
+  }
+
+  .privacy-banner {
+    display: block;
+    padding-top: 40px;
+    text-align: center;
+
+    a, span {
+      font-family: 'Roboto';
+      color: #ddd;
+      font-size: 1.2em;
+    }
+  }
+
+  .copy-right {
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-family: 'Roboto';
+    color: #ddd;
+    font-size: 1em;
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+}
+
+
+
+@media(max-width: 767px) {
+  .landing-content {
+
+    .hiw-banner {
+      .hiw-flow {
+        .flow-img.pt15 {
+          img {
+            -ms-transform: rotate(90deg); /* IE 9 */
+            -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+
+    .hero-banner {
+      .hero-promo {
+        .promo-wrapper {
+          margin: 0 auto;
+
+          h1 {
+            font-size: 30px;
+            text-align: center;
+          }
+          p {
+            font-size: 18px;
+            width: 100%;
+            text-align: center;
+          }
+
+          .hero-start {
+            text-align: center;
+          }
+        }
+      }
+
+      img {
+        display: block;
+        margin: auto;
+        margin-top: 0;
+        max-width: 350px;
+      }
+    }
+
+    .carousel-banner {
+      .landing-carousel {
+
+        .carousel-item {
+          img {
+            width: 100%;
+          }
+
+          .carousel-text {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          }
+
+          .text-wrapper {
+            margin-top: 10%;
+
+            h1 {
+              font-size: 33px;
+              color: #fff;
+            }
+            p {
+              font-size: 20px;
+              line-height: 1.5em;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 520px) {
+
+  .landing-content {
+    .hero-banner {
+      .hero-promo {
+        .promo-wrapper {
+          padding: 20px 0px;
+
+          h1 {
+            font-size: 30px;
+            padding: 5px 10px;
+            text-align: center;
+          }
+          p {
+            width: 100%;
+            text-align: center;
+            padding: 0 10px;
+          }
+
+          .hero-start {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .carousel-banner {
+      .landing-carousel {
+
+        .carousel-item {
+          img {
+            width: 100%;
+          }
+
+          .carousel-text {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          }
+
+          .text-wrapper {
+            margin-top: 10%;
+            h1 {
+              font-size: 33px;
+              color: #fff;
+            }
+            p {
+              font-size: 20px;
+              line-height: 1.5em;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}

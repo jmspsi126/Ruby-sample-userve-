@@ -1,0 +1,34 @@
+<% content_for :title do %>
+  Sign In To WeServe.io
+<% end %>
+
+<div class="register-form-wrapper">
+  <div class="register-modal mt100">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h2 class="modal-title">Sign In</h2>
+        </div>
+
+        <div class="modal-sign__col-wrap">
+            <div class="modal-sign__col">
+              <%= render "modal/social_sign_in" %>
+            </div>
+
+            <div class="modal-sign__col">
+              <div class="row row-custom" id="sign_in_show">
+                <%= react_component 'SignInModal', {authenticity_token: form_authenticity_token}%>
+              </div>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="signin-intro pt30">
+            <p>Don't have an account? <%= link_to 'Sign Up', new_user_registration_path %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

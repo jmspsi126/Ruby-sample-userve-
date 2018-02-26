@@ -1,0 +1,233 @@
+
+<div class="myprojets-wrapper">
+  <div class="myprojets-table">
+    <h2>My Projects</h2>
+    <div class="table-responsive mb30">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Project</th>
+            <th>Leader</th>
+            <th>Fund &amp; Needed</th>
+            <th>Team / <br>Needed</th>
+            <th>Tasks to <br>Review</th>
+            <th>Tasks <br>completed</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.projects.each do |project| %>
+            <tr>
+              <td class="project">
+                  <%= link_to project_path(project) do %>
+                    <span class="pull-left"><%= project.title %></span>
+                  <% end %>
+              </td>
+              <td class="leader">
+                <span class="pull-left"><a href="<%= user_path(project.user) %>"><%= project.user.name %></a></span>
+                <a class="pull-right" data-modal="#change-leader-modal" data-id="<%= project.id %>">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+              </td>
+              <td class="fund">
+
+                <span class="pull-left">฿ <%= project.funded_budget%></span>
+                <span class="pull-right">฿ <%= project.needed_budget %></span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= project.funded_percentages %>" >
+                  </div>
+                </div>
+                <div class="progress-percent"><%= project.funded_percentages %></div>
+              </td>
+              <td class="team">
+                12/13
+              </td>
+              <td class="team">
+                8
+              </td>
+              <td class="team">
+                <%= project.accepted_tasks.count %>/<%= project.tasks.count%>
+              </td>
+              <td class="delete">
+                <button type="button" class="btn-reset" data-modal="#modalRemoveProject">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Followed Projects</h2>
+    <div class="l-project-cards">
+      <ul class="l-project-cards__list">
+        <% @user.projects.each do |project| %>
+          <li class="l-project-cards__item">
+            <div class="b-project-card">
+
+              <div class="b-project-card__top">
+                <%= link_to taskstab_project_path(project), class: 'b-project-card__img-wrap' ,data: { no_turbolink: false } do%>
+                  <%= image_tag(project.picture.url, data: { 'object-fit': "cover" }) %>
+                <% end %>
+                <div class="b-project-card__user-link">
+                  <% if project.user.picture? %>
+                    <%= image_tag(project.user.picture, size: "30x30") %>
+                  <% else %>
+                    <%= gravatar_for_user(project.user)%>
+                  <%end%>
+                  <%= link_to project.user.name, user_path(project.user)%>
+                </div>
+
+              </div>
+              <div class="b-project-card__middle">
+                <%= link_to project.title, taskstab_project_path(project), data: {no_turbolink: false}, class: "b-project-card__title" %>
+
+                <div class="b-project-card__location">
+                  <svg focusable="false" version="1.1" class="svg-marker" aria-hidden="true">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-marker"></use>
+                  </svg>
+                  <%= project.country %>
+                </div>
+
+                <p class="b-project-card__description">
+                  <%= project.short_description %>
+                </p>
+              </div>
+              <div class="b-project-card__bottom">
+                <div class="progress-banner">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= project.funded_percentages %>">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="progress-report">
+                  <table>
+                    <tr class="value">
+                      <td><%= project.funded_percentages %></td>
+                      <td><%= project.team_relations_string %></td>
+                      <td><%= project.tasks_relations_string %></td>
+                      <td>฿ <%= project.funded_budget %></td>
+                    </tr>
+                    <tr class="items">
+                      <td>Funded</td>
+                      <td>Team</td>
+                      <td>Tasks</td>
+                      <td>Raised</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+        <% @user.followed_projects.each do |project| %>
+          <li class="l-project-cards__item">
+            <div class="b-project-card">
+
+              <div class="b-project-card__top">
+                <%= link_to taskstab_project_path(project), class: 'b-project-card__img-wrap' ,data: { no_turbolink: false } do%>
+                  <%= image_tag(project.picture.url, data: { 'object-fit': "cover" }) %>
+                <% end %>
+                <div class="b-project-card__user-link">
+                  <% if project.user.picture? %>
+                    <%= image_tag(project.user.picture, size: "30x30") %>
+                  <% else %>
+                    <%= gravatar_for_user(project.user)%>
+                  <%end%>
+                  <%= link_to project.user.name, user_path(project.user)%>
+                </div>
+
+              </div>
+              <div class="b-project-card__middle">
+                <%= link_to project.title, taskstab_project_path(project), data: {no_turbolink: false}, class: "b-project-card__title" %>
+
+                <div class="b-project-card__location">
+                  <svg focusable="false" version="1.1" class="svg-marker" aria-hidden="true">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-marker"></use>
+                  </svg>
+                  <%= project.country %>
+                </div>
+
+                <p class="b-project-card__description">
+                  <%= project.short_description %>
+                </p>
+              </div>
+              <div class="b-project-card__bottom">
+                <div class="progress-banner">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= project.funded_percentages %>">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="progress-report">
+                  <table>
+                    <tr class="value">
+                      <td><%= project.funded_percentages %></td>
+                      <td><%= project.team_relations_string %></td>
+                      <td><%= project.tasks_relations_string %></td>
+                      <td>฿ <%= project.funded_budget %></td>
+                    </tr>
+                    <tr class="items">
+                      <td>Funded</td>
+                      <td>Team</td>
+                      <td>Tasks</td>
+                      <td>Raised</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div class="modal-default modal-leader" id="change-leader-modal" role="dialog" aria-hidden="true" tabindex="-1">
+  <div class="modal-default__content">
+    <button type="button" class="modal-default__close"></button>
+    <h3 class="modal-default__title">Who do you want to give your leader's role to?</h3>
+    <%= form_tag change_leader_projects_path, method: "post" do %>
+        <%= hidden_field_tag(:project_id) %>
+        <label class="f-default__label" for="leader_address">Enter email:</label>
+        <%= email_field(:leader, :address) %>
+        <button class="btn-root" name="commit">Change</button>
+    <% end %>
+  </div>
+</div>
+
+<div id="modalRemoveProject" class="modal-default modal-remove-project" tabindex="-1">
+  <div class="modal-default__content" style="max-width: 900px;">
+    <button type="button" class="modal-default__close"></button>
+    <h4 class="modal-default__title">Are you sure you want to delete this project?</h4>
+    <button type='button' class='btn-root _agree'>Ok</button>
+
+    <button type='button' class='btn-root _decline'>Cancel</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+    var $modalRemoveProject = $('#modalRemoveProject');
+
+    $(document)
+        .on('click.agree', '#modalRemoveProject ._agree', function () {
+                // ToDO: Add BE to remove the current project
+            if ('success') {
+                $modalRemoveProject.trigger('click');
+            } else {
+                // ToDo: show error message
+            }
+        })
+        .on('click.decline', '#modalRemoveProject ._decline', function () {
+            $modalRemoveProject.trigger('click');
+        });
+</script>
+

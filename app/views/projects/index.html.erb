@@ -1,0 +1,78 @@
+<main class="main-wrapper">
+  <section class="s-projects">
+    <div class="s-projects__container">
+      <div class="s-projects__heading">
+        <h2 class="s-projects__title">Browse Projects</h2>
+        <div id="paginator">
+            <%= paginate @featured_projects, remote: true %>
+        </div>
+      </div>
+
+      <div class="l-project-cards"  id="search-results-show">
+          <div id="error-message-show" style="background-color: red"> </div>
+          <ul class="l-project-cards__list">
+              <%= render "projects_page" %>
+          </ul>
+      </div>
+
+      <div class="load-more">
+          <h5>Scroll Down To Load More</h5>
+      </div>
+    </div>
+  </section>
+</main>
+<button class="btn-to-top">
+  <svg focusable="false" version="1.1" class="svg-arrow-down">
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-arrow-down"></use>
+  </svg>
+</button>
+<script type="text/javascript">
+    var $window = $(window),
+        $btnToTop = $('.btn-to-top');
+
+    $(document).ready(function () {
+      function updateBtnToTopVisibility() {
+        var $sFooter = $('.landing-footer');
+        if ($sFooter.length && ($window.scrollTop() + window.innerHeight > $sFooter.offset().top)) {
+            $btnToTop.removeClass('_active');
+        } else if ($window.scrollTop() > 150) {
+            $btnToTop.addClass('_active');
+        } else {
+            $btnToTop.removeClass('_active');
+        }
+      }
+      $btnToTop.on('click', function() {
+        $('body, html').animate({scrollTop: 0}, 600);
+      });
+      $window.on('scroll.toggleBtnToTop', function() {
+        updateBtnToTopVisibility();
+      });
+      updateBtnToTopVisibility();
+
+    });
+</script>
+
+<% if  @download_keys  %>
+    <%= render "modal/created_wallet_modal" %>
+    <script type="text/javascript">
+      $('#walletModal').fadeIn();
+      $('html').addClass('_open-modal');
+    </script>
+    <script>
+      // window.setTimeout(function(){download_keys() },5000);
+      // function  download_keys(){
+      //   window.location = "";
+      //   $("#backupkeys_popup").hide();
+      // }
+    </script>
+<% end %>
+
+<% if @download_keys && @start_project %>
+    <script type="text/javascript">
+      $('#wallet_button').on('click', function() {
+          $('#walletModal').fadeOut();
+          $('#startProjectModal').fadeIn();
+          localStorage.removeItem('start_project');
+      });
+    </script>
+<% end %>

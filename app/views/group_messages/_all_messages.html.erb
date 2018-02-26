@@ -1,0 +1,45 @@
+<% unless @group_messages.blank? %>
+    <% @group_messages.each do |message| %>
+        <div class="row message">
+          <div class="message-sender">
+            <a href="#">
+              <% if message.user.picture? %>
+                  <%= image_tag(message.user.picture, class: "profile-image") %>
+              <% else %>
+                  <%= gravatar_for(message.user, 35) %>
+              <% end %>
+            </a>
+          </div>
+          <div class="message-content">
+
+            <div class="message-text">
+              <%= message.message %>
+              <% if message.attachment? %>
+                  <br>
+                  <% if %w{jpg png jpg gif bmp}.include?(message.attachment.file.extension) %>
+                      <%= image_tag message.attachment.url %>
+                      <br>
+                      Download
+                      image: <%= link_to message.attachment.file.filename, group_messages_download_files_path(id: message.id)%>
+                  <% else %>
+                      Download
+                      file: <%= link_to message.attachment.file.filename, group_messages_download_files_path(id: message.id) %>
+                  <% end %>
+                  <br>
+                  <br>
+              <% end %>
+            </div>
+            <span class="name"><%= message.user.try(:name) %></span>
+            <span class="message-date"><%= time_ago_in_words(message.created_at) %></span>
+            <br>
+
+          </div>
+        </div>
+    <% end %>
+<% else %>
+    <div class="row message">
+      <div class="message-content">
+        No Messages
+      </div>
+    </div>
+<% end %>

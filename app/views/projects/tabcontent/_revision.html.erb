@@ -1,0 +1,83 @@
+<div class="content-details revision-wrapper">
+  <h4 class="mb20">Revisions for "<%= project.title %>"</h4>
+
+  <div class="row">
+    <div class="col-md-6">
+      <a class="btn-default-weserve revisions-compare-button">Compare selected revisions</a>
+
+      <%= link_to plan_project_path(id: project.id), remote: true, class: "btn-default-weserve", onclick: "openTab(event, 'Plan')" do %>
+        Back
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="approval-switch">
+        <label class="switch">
+          <input type="checkbox" <%= project.is_approval_enabled? ? "checked='checked'" : "" %>>
+          <div class="slider round"></div>
+        </label>
+      </div>
+      <h4 style="float: right; margin-right: 10px;">Verification</h4>
+    </div>
+  </div>
+
+  <div class="revision-histories-body">
+    <%= render partial: "projects/revision_history", locals: {histories: histories, project: project, mediawiki_api_base_url: mediawiki_api_base_url } %>
+  </div>
+</div>
+
+<div id="modalVerification" class="modal-default modal-verification" tabindex="-1">
+  <div class="modal-default__content" style="max-width: 900px;">
+    <button type="button" class="modal-default__close"></button>
+    <h4 class="modal-default__title"></h4>
+    <button type='button' class='btn-root _agree'>Ok</button>
+    <button type='button' class='btn-root _decline'>Cancel</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+    var $modalVerification = $('#modalVerification'),
+        $switch = $('.approval-switch input');
+
+    function updateInputState() {
+        if ($switch.is(':checked')) {
+            $switch.prop("checked", "");
+        } else {
+            $switch.prop("checked", "checked")
+        }
+    }
+
+    $switch.on('click.switchApproval', function(e) {
+        e.preventDefault();
+        var confirmContent = "Are you sure you want to turn manual verification on? You will have to review every user's contribution in order for them to be implemented.";
+        if ($switch.is(':checked') == false) {
+            confirmContent = "Are you sure you want to turn manual verification off? Users will be able to edit your project without your approval. You will still be able to edit text, cancel contributions, and block users.";
+        }
+        $modalVerification.fadeIn().find('.modal-default__title').text(confirmContent);
+    });
+
+    $(document)
+        .on('click.agree', '#modalVerification ._agree', function () {
+            $(".revision-histories-body").html("<div class='center'><h4>Please wait....</h4></div>");
+            updateInputState();
+            $.ajax({
+                url: "/projects/<%= project.id %>/switch_approval_status",
+                type: "POST",
+                data: {is_approval_enabled: $switch.is(':checked')},
+                dataType: "script"
+            });
+            $modalVerification.fadeOut();
+        })
+        .on('click.decline', '#modalVerification ._decline', function () {
+            $modalVerification.fadeOut();
+        })
+        .on('click.closeVerificationModal', '.modal-default__close', function (e) {
+            $modalVerification.fadeOut();
+        })
+        .on('click.closeModal', '#modalVerification', function (e) {    // todo organize all modals in separate module
+            if (e.target === this) {
+                $modalVerification.fadeOut();
+            }
+        });
+
+</script>

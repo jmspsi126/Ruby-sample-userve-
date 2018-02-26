@@ -1,0 +1,14 @@
+<div id="notification-<%= notification.id %>" class="invitation notify-card">
+  <div class="notify-mark">
+    <i class="fa fa-bell-o" aria-hidden="true"></i>
+  </div>
+  <div class="notify-content">
+    <span class="date"><%= "#{notification.created_at.strftime(" %b")} #{notification.created_at.day.ordinalize}" rescue nil %></span>
+    <div class="notify-body">
+      <div class="notification-body">
+        <span><%= yield %></span>
+      </div>
+      <%= render partial: "notifications/#{notification.source_model_type.underscore}/accept_reject_buttons", locals: { notification: notification }%>
+    </div>
+  </div>
+</div>
